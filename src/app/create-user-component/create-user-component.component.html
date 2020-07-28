@@ -1,0 +1,74 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Add User</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="userForm" (ngSubmit)="userDataSubmit(userForm)">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput type="text" placeholder="User Name" name="name" formControlName="userNameCtrl">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-8">
+                                    <mat-form-field>
+                                        <input matInput type="text" placeholder="User Age" name="age" formControlName="ageCtrl" required>
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                            <br>
+                            <h4 class="card-title"><b>Family Member Details</b> &nbsp;<button type="button" mat-icon-button (click)="addItem()">
+                              <i class="material-icons">
+                                add
+                               </i>
+                                      </button>
+
+                            </h4>
+
+
+
+                            <div class="card-body" formArrayName="familyMembersList" *ngFor="let item of userForm.get('familyMembersList')['controls']; let i = index;">
+                                <div class="row" [formGroupName]="i">
+                                    <div class="col-md-5">
+                                        <mat-form-field>
+                                            <input matInput type="text" placeholder="Family Member Name" formControlName="familyMemberName" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <mat-form-field>
+                                            <input matInput type="text" maxlength=10 placeholder="Family Member Age" formControlName="familyMemberRole" required>
+                                            <!-- <mat-error *ngIf="item.get('contactPersonMobile').hasError('required')">
+                                                Field cannot be empty</mat-error>
+                                            <mat-error *ngIf="!item.get('contactPersonMobile').hasError('required')">
+                                                Enter a Valid phone Number</mat-error> -->
+                                        </mat-form-field>
+
+
+                                    </div>
+
+                                    <div class='col-md-2'>
+                                        <button mat-icon-button type="button" (click)="familyMembersList == undefined || familyMembersList.length == 1 ? warning():removeItem(i)">
+                                                  <i class="material-icons">
+                                                      remove
+                                                  </i>
+                                              </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-dark" [disabled]="userForm.invalid">Submit</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
